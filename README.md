@@ -1,20 +1,51 @@
-# A Lean 4 Metaprogramming Book
+# Metaprogramming in Lean 4日本語訳
 
-Authors: Arthur Paulino, Damiano Testa, Edward Ayers, Evgenia Karunus, Henrik Böving, Jannis Limperg, Siddhartha Gadgil, Siddharth Bhat
+* [原文](https://leanprover-community.github.io/lean4-metaprogramming-book/)
+* [原文のソースコード](https://github.com/leanprover-community/lean4-metaprogramming-book)
+* [対訳表](/GLOSSARY.md)
 
-* The textbook in html format is [here](https://leanprover-community.github.io/lean4-metaprogramming-book/).
+## 翻訳する際のルール
 
-* A PDF is [available here for download](../../releases/download/latest/Metaprogramming.in.Lean.4.pdf) (and is rebuilt on each change).
+### 方針
 
-## Contributing
+* なるべく直訳を心がける。
+* 読みやすさの観点から以下は直訳から変えて良い。 
+  * 文構造の変更
+    * 原文で1文だったところを2文に分ける
+    * 文の前半と後半を入れ替える
+  * 代名詞の明確化
+    * `it`や`that`等で記述されている中で読んだときにわかりづらそうな箇所
+  * 助動詞のニュアンスの変更
+    * `can`で書かれている文章で「～ができます」などの訳し方が日本語的に自然でない場合等
+  * 受動態⇔能動態
+    * 特に無生物主語だったり、主語がyouの場合など
+* 和訳箇所の前後や文脈に無い情報は基本的に入れない。
+* 訳注は以下の場合に記載する。
+  * 最新情報に対する記述が古くなっている場合
+  * 記述が間違っている場合
+  * 文意を把握するにあたって記述および情報が足りていない場合
 
-The markdown files are generated automatically via [mdgen](https://github.com/Seasawher/mdgen).
-Thus, if you're going to write or fix content for the book, please do so in the original Lean files inside the [lean](lean) directory.
+### 表記ルール
 
-**Important**: since `mdgen` is so simple, please avoid using comment sections
-in Lean code blocks with `/- ... -/`. If you want to insert commentaries, do so
-with double dashes `--`.
+* 文体は常に敬体（です・ます調）とする。
+* 英文をコメントアウトして、その直下に和訳を書く。
+* 和訳文を改行すると、その位置に空白が入ってしまうので段落内で改行しない。
+* 句読点には `、` `。` を用いる。
+* 英数字には半角を用いる。
+* 記号の全角・半角は『[JTF日本語標準スタイルガイド（翻訳用）](https://www.jtf.jp/tips/styleguide)』の「3 記号の表記と用途」に準拠する。
+  * 全角：`、` `。` `・` `：` `！` `？` `～` `（` `）` `「` `」` `『` `』`
+  * 半角：`/` `,`（数字の桁区切り）`.`（小数点）`-` `"` `` ` `` ` `（スペース）
+* 同格の語句の並列には中黒 `・` を用いる。
+  * カタカナ複合語の区切りには中黒を用いない。ただし、人名や熟語など、同格の語句の並列と誤解される可能性の低い箇所では中黒を用いてもよい。
+* 原文で `_` を用いて強調表示されている単語は、`**和訳単語**（元の英単語）`と訳す。ただし、専門用語ではない単語や、文が強調表示されている場合は、英語を併記しない。
+  * 原文例：`This pattern is called _structural recursion_.`
+  * 和訳例：`このパターンは**構造的再帰**（structural recursion）と呼ばれます。`
+* 3音以上のカタカナ語の末尾の長音記号「ー」は省く。
+* カタカナ語のままで違和感のない用語はカタカナ語のまま使う。
+* 原則として全角文字列とアルファベットまたはインラインコードとが隣接した場合は半角スペースを入れるが、見た目の字幅が小さな全角記号（`？` と `～` を除く全ての全角記号）の前後では半角スペースを入れない。
+  * 全角文字列と数字が隣接した場合も半角スペースを入れない。
 
-### Building the markdown files
+## 翻訳に貢献したい方へ
 
-This is not required, but if you want to build the markdown files, you can do so by running `lake run build`.
+* 競合を防ぐため、翻訳開始したとき、ファイルごとに draft PR を出してください。
+* 1つのPRに含める変更は少なめにしてください。
