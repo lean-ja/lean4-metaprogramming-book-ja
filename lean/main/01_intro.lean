@@ -426,6 +426,5 @@ passing a list with `p.mvarId!` in the head. And then we can use the
 --#--
 新しい仮定の証明をゴールとして要求するために、`p.mvarId!` を先頭に持つリストを渡して `replaceMainGoal` を呼び出します。そして `rotate_left` タクティクを使って最近追加された一番上のゴールを一番下に移動させます。
 
-[^fn1]: 日本語訳は https://lean-ja.github.io/fp-lean-ja/
---#--
+[^fn1]: 訳注：日本語訳は https://lean-ja.github.io/fp-lean-ja/
 -/
