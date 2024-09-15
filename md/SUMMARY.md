@@ -1,8 +1,10 @@
 # Summary
 
-# Main
+<!-- # Main -->
 
-- [Introduction](./main/01_intro.md)
+# 本文
+
+- [はじめに](./main/01_intro.md)
 - [Overview](./main/02_overview.md)
 - [Expressions](./main/03_expressions.md)
 - [MetaM](./main/04_metam.md)
@@ -13,13 +15,17 @@
 - [Tactics](./main/09_tactics.md)
 - [Lean4 Cheat-sheet](./main/10_cheat-sheet.md)
 
-# Extra
+<!-- # Extra -->
+
+# 付録
 
 - [Options](./extra/01_options.md)
 <!-- - [Attributes]() -->
 - [Pretty Printing](./extra/03_pretty-printing.md)
 
-# Solutions
+<!-- # Solutions -->
+
+# 解答
 
 <!-- - [Introduction]() -->
 <!-- - [Overview]() -->
