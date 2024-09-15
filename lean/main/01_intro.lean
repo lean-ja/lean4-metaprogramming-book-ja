@@ -38,7 +38,7 @@ understanding of monadic programming. The book
 is a highly recommended source on that subject.
 
 --#--
-決してLean4のメタプログラミングAPI全体を網羅的に説明するつもりはありません。また、Lean4のモナドによるプログラミングについての話題も扱いません。しかし、本書で提供する例が十分にシンプルであり、モナドプログラミングについての超深い理解がなくとも読者がフォローして理解できることを望みます。このテーマについては [Functional Programming in Lean](https://leanprover.github.io/functional_programming_in_lean/) という本がお勧めです。 [fn1]
+決してLean4のメタプログラミングAPI全体を網羅的に説明するつもりはありません。また、Lean4のモナドによるプログラミングについての話題も扱いません。しかし、本書で提供する例が十分にシンプルであり、モナドプログラミングについての超深い理解がなくとも読者がフォローして理解できることを望みます。このテーマについては [Functional Programming in Lean](https://leanprover.github.io/functional_programming_in_lean/) という本がお勧めです。 [^fn1]
 
 --#--
 ## Book structure
@@ -89,7 +89,7 @@ Note: the code snippets aren't self-contained. They are supposed to be run/read
 incrementally, starting from the beginning of each chapter.
 
 --#--
-注意：それぞれのコード片は自己完結していません。各省の初めから少しずつ実行/読むことを想定しています。
+注意：それぞれのコード片は自己完結していません。各章の初めから少しずつ実行/読むことを想定しています。
 
 --#--
 ## What does it mean to be in meta?
@@ -110,7 +110,7 @@ also say that the common usage of the language syntax is done in the
 __object-level__.
 
 --#--
-Python・C・Java・Scalaなどほとんどのプログラミング言語でコードを書くとき、通常はあらかじめ定義された構文に従わなければなりません。そうしなければコンパイラやインタプリタは我々の言わんとしていることを理解できないでしょう。Leanにおいては帰納型の定義、関数の実装、定理の証明などがこれにあたります。これを受けてコンパイラはコードをパースし、AST（抽象構文木）を構築し、その構文ノードを言語カーネルが処理できる用語に精緻化しなければなりません。このようなコンパイラが行う活動は **メタレベル** で行われると表現され、これが本書を通じて学んでいくものです。また、言語構文の一般的な使用は **オブジェクトレベル** で行われると言います。
+Python・C・Java・Scalaなどほとんどのプログラミング言語でコードを書くとき、通常はあらかじめ定義された構文に従わなければなりません。そうしなければコンパイラやインタプリタは我々の言わんとしていることを理解できないでしょう。Leanにおいては帰納型の定義、関数の実装、定理の証明などがこれにあたります。これを受けてコンパイラはコードをパースし、AST（抽象構文木）を構築し、その構文ノードを言語カーネルが処理できる項に精緻化しなければなりません。このようなコンパイラが行う活動は **メタレベル** で行われると表現され、これが本書を通じて学んでいくものです。また、言語構文の一般的な使用は **オブジェクトレベル** で行われると言います。
 
 --#--
 In most systems, the meta-level activities are done in a different language to
@@ -426,6 +426,6 @@ passing a list with `p.mvarId!` in the head. And then we can use the
 --#--
 新しい仮定の証明をゴールとして要求するために、`p.mvarId!` を先頭に持つリストを渡して `replaceMainGoal` を呼び出します。そして `rotate_left` タクティクを使って最近追加された一番上のゴールを一番下に移動させます。
 
-[fn1]: 日本語訳は https://lean-ja.github.io/fp-lean-ja/
+[^fn1]: 日本語訳は https://lean-ja.github.io/fp-lean-ja/
 --#--
 -/
