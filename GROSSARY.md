@@ -5,13 +5,17 @@
 | abstract syntax tree | 抽象構文木 |
 | concrete syntax tree | 解析木 |
 | context | コンテキスト（証明やプログラム中のスコープを指す場合）、文脈（それ以外） |
+| delaboration | デラボレーション |
 | elaborate | 精緻化 |
 | elaboration | エラボレーション |
+| elaborator | エラボレータ |
 | hypothesis | 仮定 |
 | expression | 式 |
 | implication | 含意 |
 | metavariable | メタ変数 |
 | notation | 記法 |
+| parse | パース |
 | reflection | リフレクション |
 | syntax | 構文 |
-| term | 項 |
+| term | 項（式を構成する要素）、用語 |
+| unification | ユニフィケーション |
