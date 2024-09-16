@@ -5,7 +5,7 @@
 # 本文
 
 - [はじめに](./main/01_intro.md)
-- [Overview](./main/02_overview.md)
+- [概要](./main/02_overview.md)
 - [Expressions](./main/03_expressions.md)
 - [MetaM](./main/04_metam.md)
 - [Syntax](./main/05_syntax.md)
