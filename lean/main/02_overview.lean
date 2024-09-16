@@ -21,7 +21,7 @@ In the next chapters, you will learn the particulars. As you read on, you might 
 ## Connection to compilers
 
 --#--
-## コンパイラとの接続
+## コンパイラにアクセスする
 
 --#--
 Metaprogramming in Lean is deeply connected to the compilation steps - parsing, syntactic analysis, transformation, and code generation.
