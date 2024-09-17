@@ -1,6 +1,11 @@
 /-
+--#--
 # `MetaM`
 
+--#--
+
+
+--#--
 The Lean 4 metaprogramming API is organised around a small zoo of monads. The
 four main ones are:
 
