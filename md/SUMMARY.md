@@ -6,7 +6,7 @@
 
 - [はじめに](./main/01_intro.md)
 - [概要](./main/02_overview.md)
-- [Expressions](./main/03_expressions.md)
+- [式](./main/03_expressions.md)
 - [MetaM](./main/04_metam.md)
 - [Syntax](./main/05_syntax.md)
 - [Macros](./main/06_macros.md)
