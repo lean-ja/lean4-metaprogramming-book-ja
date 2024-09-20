@@ -96,7 +96,7 @@ others. Internally, closing a goal in this way corresponds to *assigning* the
 metavariable; we write `?m := e` for this assignment.
 
 --#--
-ゴールを閉じるには、ターゲットの型の式 `e` を与えなければなりません。この式にはメタ変数のローカルコンテキストの fvar を含めることができますが、それ以外を含めることはできません。内部的にはこの方法でゴールを閉じることは、メタ変数を **割当** することに相当します；この割当は `?m := e` と書かれます。
+ゴールを閉じるには、ターゲットの型の式 `e` を与えなければなりません。この式にはメタ変数のローカルコンテキストの fvar を含めることができますが、それ以外を含めることはできません。内部的にはこの方法でゴールを閉じることは、メタ変数を **割り当てる** （assign）ことに相当します；この割当は `?m := e` と書かれます。
 
 --#--
 The second, complementary view of metavariables is that they represent holes
@@ -123,7 +123,7 @@ second goal: it is "updated" (not really, as we will see) to have target `n =
 m`. The metavariable `?x` represents the same expression everywhere it occurs.
 
 --#--
-ここで `?x` は別のメタ変数で、両方のゴールのターゲットの型の穴であり、この証明でこの後埋める必要があります。`?x` の型は `Nat` であり、そのローカルコンテキストは `[n : Nat, m : Nat]` です。ここで、最初のゴールを反射律によって解く場合、`?x` は `n` でなければならないため、`?x := n` を割当します。きわめて重要なことですが、これは2番目のゴールにも影響します：2番目のゴールはターゲット `n = m` を持つように「更新」されます（後述しますが、実際には更新はされません）。メタ変数 `?x` は出現するすべての個所で同じ式を表しているのです。
+ここで `?x` は別のメタ変数で、両方のゴールのターゲットの型の穴であり、この証明でこの後埋める必要があります。`?x` の型は `Nat` であり、そのローカルコンテキストは `[n : Nat, m : Nat]` です。ここで、最初のゴールを反射律によって解く場合、`?x` は `n` でなければならないため、`?x := n` を割り当てます。きわめて重要なことですが、これは2番目のゴールにも影響します：2番目のゴールはターゲット `n = m` を持つように「更新」されます（後述しますが、実際には更新はされません）。メタ変数 `?x` は出現するすべての個所で同じ式を表しているのです。
 
 --#--
 
@@ -186,7 +186,7 @@ we omit them.
 Having created these metavariables, `apply` assigns
 
 --#--
-これらのメタ変数を作成した後、`apply` は以下を割当し、
+これらのメタ変数を作成した後、`apply` は以下を割り当て、
 
 ```lean
 ?m1 := @Eq.trans α (f (f a)) ?b a ?m2 ?m3
@@ -206,7 +206,7 @@ assigns `?b := f a`. Assigned metavariables are not considered open goals, so
 the only goal that remains is `?m3`.
 
 --#--
-この時点で2番目の `apply` タクティクが処理を引き継ぎます。これは `?m2` を現在のゴールとして受け取り、それを `h` に適用します。これは成功し、タクティクは `?m2 := h (f a)` を割当します。この割当は `?b` が `f a` でなければならないことを意味するため、タクティクは `?b := f a` も割当します。割り当てられたメタ変数はオープンなゴールとはみなされないため、残るゴールは `?m3` だけとなります。
+この時点で2番目の `apply` タクティクが処理を引き継ぎます。これは `?m2` を現在のゴールとして受け取り、それを `h` に適用します。これは成功し、タクティクは `?m2 := h (f a)` を割り当てます。この割当は `?b` が `f a` でなければならないことを意味するため、タクティクは `?b := f a` も割り当てます。割り当てられたメタ変数はオープンなゴールとはみなされないため、残るゴールは `?m3` だけとなります。
 
 --#--
 Now the third `apply` comes in. Since `?b` has been assigned, the target of
@@ -214,7 +214,7 @@ Now the third `apply` comes in. Since `?b` has been assigned, the target of
 tactic assigns `?m3 := h a`.
 
 --#--
-ここで3つ目の `apply` がやってきます。`?b` が割り当てられたため、`?m3` のターゲットは `f a = a` となります。ここでも `h` の適用が成功し、タクティクは `?m3 := h a` を割当します。
+ここで3つ目の `apply` がやってきます。`?b` が割り当てられたため、`?m3` のターゲットは `f a = a` となります。ここでも `h` の適用が成功し、タクティクは `?m3 := h a` を割り当てます。
 
 --#--
 At this point, all metavariables are assigned as follows:
@@ -290,7 +290,7 @@ Its arguments are:
 
 --#--
 - `type?`：新しいメタ変数のターゲットの型。`none` の場合、ターゲットの型は `Sort ?u` となります。ここで `?u` は宇宙レベルのメタ変数です。（これは宇宙レベルのメタ変数の特別なクラスであり、これまで単に「メタ変数」と呼んできた式についてのメタ変数とは区別されます。）
-- `kind`：メタ変数の種（kind）。詳しくは [メタ変数の種](#metavariable-kinds) を参照してください（通常はデフォルト値が正しいです）。
+- `kind`：メタ変数の種（kind）。詳しくは [メタ変数の種](#定義上の同値) [^fn1] を参照してください（通常はデフォルト値が正しいです）。[^fn1]
 - `userName`：新しいメタ変数のユーザが目にする名前。これはメタ変数がゴールに現れる際に表示されるものになります。`MVarId` と異なり、この名前は一意である必要はありません。
 
 --#--
@@ -314,7 +314,7 @@ Metavariables are initially unassigned. To assign them, use
 `Lean.MVarId.assign` with type
 
 --#--
-メタ変数は初期化時は何も割り当てられません。割当するには以下の型を持つ `Lean.MVarId.assign` を使用します。
+メタ変数は初期化時は何も割り当てられません。割り当てるには以下の型を持つ `Lean.MVarId.assign` を使用します。
 
 ```lean
 assign (mvarId : MVarId) (val : Expr) : MetaM Unit
@@ -383,7 +383,7 @@ other words, `instantiateMVars` brings our expressions up to date with the
 current metavariable state.
 
 --#--
-この操作は自由に使うべきです。メタ変数を割当すると、そのメタ変数を含む既存の式はすぐには更新されません。これは、例えばある式が等式であるかどうかをチェックするためにマッチを行う際に問題になります。`instantiateMVars` を使わない場合、式 `?m` が、例えばたまたま `0 = n` が割り当てられているとした時に、それが等式を表していることを見逃してしまうかもしれません。言い換えると、`instantiateMVars` は式を現在のメタ変数の状態に合わせてくれるのです。
+この操作は自由に使うべきです。メタ変数を割り当てると、そのメタ変数を含む既存の式はすぐには更新されません。これは、例えばある式が等式であるかどうかをチェックするためにマッチを行う際に問題になります。`instantiateMVars` を使わない場合、式 `?m` が、例えばたまたま `0 = n` が割り当てられているとした時に、それが等式を表していることを見逃してしまうかもしれません。言い換えると、`instantiateMVars` は式を現在のメタ変数の状態に合わせてくれるのです。
 
 --#--
 Instantiating metavariables requires a full traversal of the input expression,
@@ -495,7 +495,7 @@ hypothesis of type `Nat`; another local context may declare that `h` is a local
 definition with value `List.map`.
 
 --#--
-この式の型は何でしょうか？この答えは `e`　が解釈されるローカルコンテキストに依存します。あるローカルコンテキストでは `h` は `Nat` 型のローカルの仮定かもしれません；また別のローカルコンテキストでは `List.map` の値を持つローカル定義として宣言されているかもしれません。
+この式の型は何でしょうか？この答えは `e` が解釈されるローカルコンテキストに依存します。あるローカルコンテキストでは `h` は `Nat` 型のローカルの仮定かもしれません；また別のローカルコンテキストでは `List.map` の値を持つローカル定義として宣言されているかもしれません。
 
 --#--
 Thus, expressions are only meaningful if they are interpreted in the local
@@ -680,7 +680,7 @@ The `myAssumption` tactic contains three functions we have not seen before:
 
 --#--
 - `Lean.MVarId.checkNotAssigned` はメタ変数がすでに割当済みかどうかチェックします。上記で渡している「myAssumption」引数は現在のタクティクの名前です。これはより良いエラーメッセージを生成するために使用されます。
-- `Lean.Meta.isDefEq` は2つの定義が定義上等しいかどうかをチェックします。詳細は [定義上の同値の節](#definitional-equality) を参照してください。
+- `Lean.Meta.isDefEq` は2つの定義が定義上等しいかどうかをチェックします。詳細は [定義上の同値の節](#定義上の同値) を参照してください。
 - `Lean.LocalDecl.toExpr` はローカルの仮定に対応する `fvar` 式を構築する補助関数です。
 
 --#--
@@ -696,7 +696,7 @@ there are actually two ways to assign a metavariable. We have seen the regular
 way; the other way is called a *delayed assignment*.
 
 --#--
-上記のメタ変数の割当についての議論にはあからさまな嘘が含まれていました：メタ変数の割当には本当は2つの方法があります。ここまででは正規の方法を見てきました；もう一つの方法は **遅延割当** （delayed assignment）と呼ばれます。
+上記のメタ変数の割当についての議論には意図的な嘘が含まれていました：メタ変数の割当には本当は2つの方法があります。ここまででは正規の方法を見てきました；もう一つの方法は **遅延割当** （delayed assignment）と呼ばれます。
 
 --#--
 We do not discuss delayed assignments in any detail here since they are rarely
@@ -1314,7 +1314,7 @@ factors:
    - Synthetic opaque: `isDefEq` never assigns the metavariable.
 
 --#--
-1. そのメタ変数の深さが現在の `MetavarContext` の深さと同じでなければならない。詳しくは [メタ変数の深さについての節](#metavariable-depth) を参照してください。
+1. そのメタ変数の深さが現在の `MetavarContext` の深さと同じでなければならない。詳しくは [メタ変数の深さについての節](#メタ変数の深さ) を参照してください。
 2. それぞれのメタ変数が `isDefEq` の動作を変更することだけが目的の **種** （kind、`MetavarKind` 型の値）を持つこと。可能な種は以下の通りです：
    - Natural：`isDefEq` はメタ変数を自由に割り当てます。これがデフォルトです。
    - Synthetic：`isDefEq` はメタ変数を割り当てることができますが、可能であれば割当を避けます。例えば、`?n` がnaturalなメタ変数で、`?s` がsyntheticなメタ変数であるとします。ユニフィケーションの問題 `?s =?= ?n` に直面したとき、`isDefEq` は `?s` ではなく `?n` に割当を行います。
@@ -1334,7 +1334,7 @@ wrong with these functions, but the additional facilities of `MetaM` often
 provide more convenient ways.
 
 --#--
-前の章では、式を構築するためにいくつかのプリミティブな関数を見ました：`Expr.app`・`Expr.const`・`mkAppN` などです。これらの関数に問題はありませんが、`MetaM` の追加機能によってより便利に提供されることが多いです。
+前の章では、式を構築するためにいくつかのプリミティブな関数を見ました：`Expr.app`・`Expr.const`・`mkAppN` などです。これらの関数に問題はありませんが、`MetaM` の追加機能によってより便利な方法が提供されます。
 
 --#--
 
@@ -1751,7 +1751,9 @@ def myApply (goal : MVarId) (e : Expr) : MetaM (List MVarId) := do
     -- metavariables for the `xᵢ` and obtain the conclusion `U`. (If `type` does
     -- not have this form, `args` is empty and `conclusion = type`.)
     --#--
-    -- `type` が `∀ (x₁ : T₁) ... (xₙ : Tₙ), U` の形式を持つ場合、`xᵢ` に対応する新しいメタ変数を導入し、この結論 `U` を取得する。（もし `type` がこの形式でない場合、`args` は空で `conclusion = type`　となる。）
+    -- `type` が `∀ (x₁ : T₁) ... (xₙ : Tₙ), U` の形式を持つ場合、
+    -- `xᵢ` に対応する新しいメタ変数を導入し、この結論 `U` を取得する。
+    -- （もし `type` がこの形式でない場合、`args` は空で `conclusion = type`　となる。）
     let (args, _, conclusion) ← forallMetaTelescopeReducing type
     --#--
     -- If the conclusion unifies with the target:
@@ -1768,7 +1770,8 @@ def myApply (goal : MVarId) (e : Expr) : MetaM (List MVarId) := do
       -- `isDefEq` may have assigned some of the `args`. Report the rest as new
       -- goals.
       --#--
-      -- `isDefEq` は `args` の中のいくつかのメタ変数を割り当てるかもしれないため、その結果残った新しいゴールを報告する。
+      -- `isDefEq` は `args` の中のいくつかのメタ変数を割り当てるかもしれないため、
+      -- その結果残った新しいゴールを報告する。
       let newGoals ← args.filterMapM λ mvar => do
         let mvarId := mvar.mvarId!
         if ! (← mvarId.isAssigned) && ! (← mvarId.isDelayedAssigned) then
@@ -2131,4 +2134,6 @@ Notice that changing the type of the metavariable from `Nat` to, for example, `S
 Use `saveState` and `restoreState` to revert metavariable assignments.
 --#--
 15. [**バックトラッキング**] `isDefEq` を使用して `?a + Int` と `"hi" + ?b` が定義上等しいことをチェックしてください（メタ変数の型には適切な型、または `Option.none` を使用してください！）。メタ変数の割り当てを戻すには、`saveState` と `restoreState` を使用してください。
+
+[^fn1]: 原文のリンクは「メタ変数の種（#metavariable-kinds）」の節へのリンクでしたが、該当する節が無くリンクが切れていたため、種について取り上げていた節にリンクを張るようにしています。
 -/
