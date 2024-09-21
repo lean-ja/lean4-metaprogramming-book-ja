@@ -24,10 +24,14 @@
 | metavariable | メタ変数 |
 | notation | 記法 |
 | parse | パース |
+| precedence | 優先順位 |
+| priority | 優先度 |
 | proof term | 証明項 |
 | reduction | 簡約 |
 | reflection | リフレクション |
+| syntactically | 構文的 |
 | syntax | 構文 |
+| syntax category | 構文カテゴリ |
 | target type | ターゲットの型 |
 | term | 項（式を構成する要素）、用語 |
 | transparency | 透過度 |
@@ -35,3 +39,10 @@
 | universe | 宇宙 |
 | universe-polymorphic constant | 宇宙多相な定数 |
 | β-reduction | β簡約 |
+
+# 英語表現をそのまま用いている単語
+
+| 用語 |
+| --- |
+| macro hygiene |
+| loose |
