@@ -12,7 +12,7 @@ not go into great detail about this yet and postpone quite a bit of this to
 later chapters.
 
 --#--
-この章では、Leanにおける構文の宣言とその操作方法について説明します。構文を操作する方法はたくさんあるため、この章では詳細にはまたあまり深入りせず、ほとんどを後の章に先送りします。
+この章では、Leanにおける構文の宣言とその操作方法について説明します。構文を操作する方法はたくさんあるため、この章ではまだ詳細にあまり深入りせず、ほとんどを後の章に先送りします。
 
 --#--
 ## Declaring Syntax
@@ -641,7 +641,10 @@ in the next example Lean will allow us to call `getNat` on the resulting
 この例の `x` と `y` は `Syntax` ではなく `` TSyntax `term `` 型であることに注意してください。コンストラクタを見ればわかるように、完璧に `TSyntax` ではない型だけで構成されている `Syntax` に対してパターンマッチしたのにも関わらずにこうなってしまっているのは、いったい何が起こっているのでしょうか？基本的に、`` `() `` 構文は賢いため、マッチする構文からくる可能性のあるもの（この場合は `term`）の中で最も一般的な構文カテゴリを把握することができます。この時に型付けされた構文型 `TSyntax` が用いられます。これはそれのもとになった構文カテゴリの `Name` でパラメータ化されています。これはプログラマにとって何が起こっているのかを確認するために便利なだけでなく、他にも利点があります。例えば、次の例で構文カテゴリを `num` に限定すると、Lean はパターンマッチやパニックのオプション無しで、結果の `` TSyntax `num `` に対して直接 `getNat` を呼び出すことができます：
 -/
 
+--#--
 -- Now we are also explicitly marking the function to operate on term syntax
+--#--
+-- ここで項の構文を操作する関数を明示的にマークしている
 def isLitAdd : TSyntax `term → Option Nat
   | `(Nat.add $x:num $y:num) => some (x.getNat + y.getNat)
   | _ => none
@@ -988,5 +991,4 @@ the bound variables, we refer the reader to the macro chapter.
     ヒント：`Std.ExtendedBinder.extBinder` パーサを使ってください。
     ヒント：これらの import を機能させるには読者の Lean プロジェクトに batteries をインストールする必要があります。
 
---#--
 -/
