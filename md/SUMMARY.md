@@ -9,7 +9,7 @@
 - [式](./main/03_expressions.md)
 - [MetaM](./main/04_metam.md)
 - [構文](./main/05_syntax.md)
-- [Macros](./main/06_macros.md)
+- [マクロ](./main/06_macros.md)
 - [Elaboration](./main/07_elaboration.md)
 - [Embedding DSLs By Elaboration](./main/08_dsls.md)
 - [Tactics](./main/09_tactics.md)
