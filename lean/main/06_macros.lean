@@ -458,7 +458,7 @@ a list of all the macro scopes that are active right now. When the current
 macro introduces a new identifier what is actually getting added is an
 identifier of the form:
 --#--
-マクロが構文の変換だけを行うことを考えると、上記の `eval` は 42 ではなく 10 を返すと期待できるかもしれません：つまるところ、返される構文は `(fun x => x) 10` となるはずだからです。もちろんこれは作者の意図したことではありませんが、C言語のような原始的なマクロシステムではこのようなことが起こります。では、Lean はこのような健全性の問題をどのように回避しているのでしょうか？これについては [Beyond Notations](https://lmcs.episciences.org/9362/pdf) という優れた論文で詳しく述べられています。この論文では Lean のアイデアと実装について詳しく論じられています。実用上、詳細はそれほど興味深いものではないので、ここではトピックの概を述べるにとどまります。Beyond Notations で説明されているアイデアは「マクロスコープ」と呼ばれる概念に集約されます。新しいマクロが呼び出されるたびに新しいマクロスコープ（基本的には一意の番号）が現在アクティブなすべてのマクロスコープのリストに追加されます。現在のマクロが新しい識別子を導入するとき、実際に追加されるのは次の形式の識別子です：
+マクロが構文の変換だけを行うことを考えると、上記の `eval` は 42 ではなく 10 を返すと期待できるかもしれません：つまるところ、返される構文は `(fun x => x) 10` となるはずだからです。もちろんこれは作者の意図したことではありませんが、C言語のような原始的なマクロシステムではこのようなことが起こります。では、Lean はこのような健全性の問題をどのように回避しているのでしょうか？これについては [Beyond Notations](https://lmcs.episciences.org/9362/pdf) という優れた論文で詳しく述べられています。この論文では Lean のアイデアと実装について詳しく論じられています。実用上、詳細はそれほど興味深いものではないので、ここではトピックの概要を述べるにとどまります。Beyond Notations で説明されているアイデアは「マクロスコープ」と呼ばれる概念に集約されます。新しいマクロが呼び出されるたびに新しいマクロスコープ（基本的には一意の番号）が現在アクティブなすべてのマクロスコープのリストに追加されます。現在のマクロが新しい識別子を導入するとき、実際に追加されるのは次の形式の識別子です：
 
 ```
 <actual name>._@.(<module_name>.<scopes>)*.<module_name>._hyg.<scopes>
@@ -707,7 +707,7 @@ arith language using some special syntax or whatever else comes to your mind.
 As promised in the syntax chapter here is Binders 2.0. We'll start by
 reintroducing our theory of sets:
 --#--
-構文の章で約束したように、束縛子 2.0 を紹介しましょう。まず集合論を再び導入することから始めます：
+構文の章で約束したように、パワーアップした束縛子を導入しましょう。まず集合論を再び導入することから始めます：
 -/
 def Set (α : Type u) := α → Prop
 def Set.mem (x : α) (X : Set α) : Prop := X x
