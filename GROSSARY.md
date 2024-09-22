@@ -21,6 +21,7 @@
 | implication | 含意 |
 | instantiation | インスタンス化 |
 | kind | 種 |
+| macro hygiene | マクロの健全性 |
 | metavariable | メタ変数 |
 | notation | 記法 |
 | parse | パース |
@@ -44,5 +45,5 @@
 
 | 用語 |
 | --- |
-| macro hygiene |
 | loose |
+| syntax quotation |
