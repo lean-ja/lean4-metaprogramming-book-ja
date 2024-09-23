@@ -48,7 +48,7 @@ The next step is giving some semantics to the syntax. With commands, this
 is done by registering a so called command elaborator.
 
 --#--
-次のステップは構文に語義を与えることです。コマンドの場合、これはいわゆるコマンドエラボレータを登録することで行われます。
+次のステップは構文にセマンティクスを与えることです。コマンドの場合、これはいわゆるコマンドエラボレータを登録することで行われます。
 
 --#--
 Command elaborators have type `CommandElab` which is an alias for:
@@ -123,7 +123,7 @@ look at how the elaboration process actually works:
 さて、コマンドエラボレータの種類を理解したところで、エラボレーションのプロセスが実際にどのように機能するのかを簡単に見てみましょう。
 1. 現在の `Syntax` に適用できるマクロがあるかどうかをチェックする。適用可能なマクロがあり、例外が投げられなければ、結果の `Syntax` がコマンドとして再帰的にエラボレートされます。
 2. マクロを適用できない場合は、エラボレートする `Syntax` の `SyntaxKind` に対して登録されているすべての `CommandElab` を検索する。これは `command_elab` 属性を使用して登録されています。
-3. これらの `CommandElab` はすべて `unsupportedSyntaxException` を投げるものが出現するまで順番に試行されます。これは、そのエラボレータがこの特定の `Syntax` の構築に対して「責任を負っている」ことを示す Lean 流の方法です。これらのエラボレータは何かが間違っていることをゆーざに示すために通常の例外を投げうることに注意してください。責任を持つエラボレータが見つからない場合、コマンドのエラボレーションは `unexpected syntax` エラーメッセージとともに中断されます。
+3. これらの `CommandElab` はすべて `unsupportedSyntaxException` を投げるものが出現するまで順番に試行されます。これは、そのエラボレータがこの特定の `Syntax` の構築に対して「責任を負っている」ことを示す Lean 流の方法です。これらのエラボレータは何かが間違っていることをユーザに示すために通常の例外を投げうることに注意してください。責任を持つエラボレータが見つからない場合、コマンドのエラボレーションは `unexpected syntax` エラーメッセージとともに中断されます。
 
 --#--
 As you can see the general idea behind the procedure is quite similar to ordinary macro expansion.
@@ -241,7 +241,7 @@ as `elabCommand` (the entry point for command elaboration) to tell us
 which macros or elaborators are relevant to the command we gave it.
 
 --#--
-この節の最後のミニプロジェクトとして、実際に役立つコマンドのエラボレータを作ってみましょう。これはコマンドを受け取り、`elabCommand`（コマンドのエラボレーションのエントリポイント）と同じメカニズムを使って、与えたコマンドに関連するマクロやエラボレータを教えてくれます。
+この節の最後のミニプロジェクトとして、実際に役立つコマンドエラボレータを作ってみましょう。これはコマンドを受け取り、`elabCommand`（コマンドのエラボレーションのエントリポイント）と同じメカニズムを使って、与えたコマンドに関連するマクロやエラボレータを教えてくれます。
 
 --#--
 We will not go through the effort of actually reimplementing `elabCommand` though
@@ -290,7 +290,7 @@ Most notably they elaborate all the values of things like definitions,
 types (since these are also just `Expr`) etc.
 
 --#--
-項はある種の `Expr` を表す `Syntax` オブジェクトです。項のエラボレータは私たちが書くコードのほとんどを処理するものです。特に、定義や型（これらも単なる `Expr` であるため）など、すべての値をエラボレートします。
+項はある種の `Expr` を表す `Syntax` オブジェクトです。項エラボレータは私たちが書くコードのほとんどを処理するものです。特に、定義や型（これらも単なる `Expr` であるため）など、すべての値をエラボレートします。
 
 --#--
 All terms live in the `term` syntax category (which we have seen in action
@@ -309,7 +309,7 @@ As with command elaboration, the next step is giving some semantics to the synta
 With terms, this is done by registering a so called term elaborator.
 
 --#--
-コマンドのエラボレーションと同様に、次のステップは構文に語義を与えることです。項の場合、これはいわゆる項のエラボレータを登録することで行われます。
+コマンドのエラボレーションと同様に、次のステップは構文にセマンティクスを与えることです。項の場合、これはいわゆる項エラボレータを登録することで行われます。
 
 --#--
 Term elaborators have type `TermElab` which is an alias for:
@@ -325,7 +325,7 @@ quite different from command elaboration:
   the `Syntax` object.
 
 --#--
-項のエラボレータは `TermElab` という型を持っており、これは `Syntax → Option Expr → TermElabM Expr` という型のエイリアスです。この型の時点ですでにコマンドのエラボレーションとはかなり異なっています：
+項エラボレータは `TermElab` という型を持っており、これは `Syntax → Option Expr → TermElabM Expr` という型のエイリアスです。この型の時点ですでにコマンドのエラボレーションとはかなり異なっています：
 - コマンドのエラボレーションと同様に、この `Syntax` はユーザがこの項を作成するために使用したものです。
 - `Option Expr` は期待される項の型ですが、これは常にわかるとは限らないため、`Option` 引数となっています。
 - コマンドのエラボレーションとは異なり、項のエラボレーションはその副作用によって実行されるだけでなく、`TermElabM Expr` が戻り値には実際の興味の対象、つまりその `Syntax` オブジェクトを表す `Expr` を含んでいます。
@@ -352,7 +352,7 @@ until we are done. There is, however, one special action that a term elaborator
 can do during its execution.
 
 --#--
-項のエラボレーションの基本的なアイデアはコマンドのエラボレーションと同じです：マクロを展開し、`term_elab` 属性によって `Syntax` に登録された項のエラボレータを全て完了するまで再帰的に実行します（`term_elab` 属性が項のエラボレーションを実行することもあります）。しかし、項のエラボレータが実行中にできる特別なアクションが1つあります。
+項のエラボレーションの基本的なアイデアはコマンドのエラボレーションと同じです：マクロを展開し、`term_elab` 属性によって `Syntax` に登録された項エラボレータを全て完了するまで再帰的に実行します（`term_elab` 属性が項のエラボレーションを実行することもあります）。しかし、項エラボレータが実行中にできる特別なアクションが1つあります。
 
 --#--
 A term elaborator may throw `Except.postpone`. This indicates that
@@ -368,7 +368,7 @@ registered in `SyntheticMVarKind`. Right now, there are four of these:
 - `postponed`, the ones that are created at `Except.postpone`
 
 --#--
-項のエラボレータは `Except.postpone` を投げることがあります。これは項のエラボレータが作業を続けるためにさらなる情報を必要としていることを示します。この不足している情報を表現するために、Lean はいわゆる synthetic metavariable を使用します。以前からご存じのように、メタ変数は埋められることを待っている `Expr` の穴です。synthetic metavariable はそれを解決するための特別なメソッドを持っている点で異なっており、`SyntheticMVarKind` に登録されています。現時点では4種類あります：
+項エラボレータは `Except.postpone` を投げることがあります。これは項エラボレータが作業を続けるためにさらなる情報を必要としていることを示します。この不足している情報を表現するために、Lean はいわゆる synthetic metavariable を使用します。以前からご存じのように、メタ変数は埋められることを待っている `Expr` の穴です。synthetic metavariable はそれを解決するための特別なメソッドを持っている点で異なっており、`SyntheticMVarKind` に登録されています。現時点では4種類あります：
 - `typeClass`、メタ変数は型クラスの統合で解決される
 - `coe`、メタ変数は強制によって解決される（型クラスの特殊なケース）
 - `tactic`、メタ変数はタクティクの項であり、タクティクを実行することで解決される
@@ -380,7 +380,7 @@ At some point, execution of postponed metavariables will be resumed by the term 
 in hopes that it can now complete its execution. We can try to see this in
 action with the following example:
 --#--
-このような synthetic metavariable が作成されると、次の上位レベルの項のエラボレータが継続されます。ある時点で延期されたメタ変数の実行は、その実行が完了できる望みができた時に項のエラボレータによって再開されます。次の例でこれを実際に見てみましょう：
+このような synthetic metavariable が作成されると、次の上位レベルの項エラボレータが継続されます。ある時点で延期されたメタ変数の実行は、その実行が完了できる望みができた時に項エラボレータによって再開されます。次の例でこれを実際に見てみましょう：
 -/
 #check set_option trace.Elab.postpone true in List.foldr .add 0 [1,2,3] -- [Elab.postpone] .add : ?m.5695 → ?m.5696 → ?m.5696
 
@@ -414,7 +414,7 @@ in place of `.add`), the elaboration of the other two arguments then yields the 
 this information to complete elaboration.
 
 --#--
-さて、例に戻ると Lean はこの時点で `.add` が型 `?m1 → ?m2 → ?m2`（ここで `?x` はメタ変数の記法です）を持つ必要があることを知っています。`.add` のエラボレータは `?m2` の実際の値を知る必要があるため、項のエラボレータは実行を延期します（これは `.add` の代わりに内部的に synthetic metavariable を作成することで行われます）。他の2つの引数のエラボレーションによって `?m2` が `Nat` でなければならないという事実が得られるため、`.add` のエラボレータが続行されると、この情報を使ってエラボレーションを完了することができます。
+さて、例に戻ると Lean はこの時点で `.add` が型 `?m1 → ?m2 → ?m2`（ここで `?x` はメタ変数の記法です）を持つ必要があることを知っています。`.add` のエラボレータは `?m2` の実際の値を知る必要があるため、項エラボレータは実行を延期します（これは `.add` の代わりに内部的に synthetic metavariable を作成することで行われます）。他の2つの引数のエラボレーションによって `?m2` が `Nat` でなければならないという事実が得られるため、`.add` のエラボレータが続行されると、この情報を使ってエラボレーションを完了することができます。
 
 --#--
 We can also easily provoke cases where this does not work out. For example:
@@ -443,7 +443,7 @@ but didn't have enough information to finish elaboration and thus failed.
 Adding new term elaborators works basically the same way as adding new
 command elaborators so we'll only take a very brief look:
 --#--
-新しい項のエラボレータの追加は、新しいコマンドのエラボレータの追加と基本的に同じように機能するため、ごく簡単に見ておきましょう：
+新しい項エラボレータの追加は、新しいコマンドエラボレータの追加と基本的に同じように機能するため、ごく簡単に見ておきましょう：
 -/
 
 syntax (name := myterm1) "myterm 1" : term
@@ -505,7 +505,7 @@ def myanonImpl : TermElab := fun stx typ? => do
   -- 型がわからないメタ変数である場合、実行を延期しようとする。
   -- メタ変数は関数のエラボレータのように、それらが何であるか解明するための情報が
   -- まだ十分手に入れられない際に暗黙のパラメータの値を埋めるために用いられる。
-  -- 項のエラボレータが実行を延期できるのは一度だけであるため、エラボレータが無限ループに陥ることはない。
+  -- 項エラボレータが実行を延期できるのは一度だけであるため、エラボレータが無限ループに陥ることはない。
   -- 従って、ここでは実行の延期だけを試みるが、そうしないと例外を引き起こすかもしれない。
   tryPostponeIfNoneOrMVar typ?
   --#--
@@ -595,7 +595,7 @@ elab "⟨⟨" args:term,* "⟩⟩" : term <= t => do
     Please add these semantics:
 
 --#--
-    これらの語義を追加してください：
+    これらのセマンティクスを追加してください：
 
 --#--
     **a)** using `syntax` + `@[command_elab alias] def elabOurAlias : CommandElab`.
@@ -628,7 +628,7 @@ elab "⟨⟨" args:term,* "⟩⟩" : term <= t => do
     Please add these semantics:
 
 --#--
-    これらの語義を追加してください：
+    これらのセマンティクスを追加してください：
 
 --#--
     **a)** using `syntax` + `@[tactic nthRewrite] def elabNthRewrite : Lean.Elab.Tactic.Tactic`.
