@@ -47,3 +47,4 @@
 | --- |
 | loose |
 | syntax quotation |
+| synthetic metavariable |
