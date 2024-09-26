@@ -509,7 +509,7 @@ which allows it to convert raw Lean terms like
 into readable strings like`(2 = 2)`. The full code listing given below shows how
 to do this:
 --#--
-マッチする式を見つけることができたため、このマッチによて定理を閉じる必要があります。これには `Lean.Elab.Tactic.closeMainGoal` を用います。マッチする式が無い場合、`Lean.Meta.throwTacticEx` で例外を投げ、これによって与えられたゴールに対応するエラーを報告することができます。この例外を投げるとき、`m!"..."` を使って例外をフォーマットし、`MessageData` を構築します。これは `f!"..."` による `Format` よりもきれいなエラーメッセージを提供します。これは `MessageData` が **デラボレーション** も実行し、`(Eq.{1} Nat (OfNat.ofNat.{0} Nat 2 (instOfNatNat 2)) (OfNat.ofNat.{0} Nat 2 (instOfNatNat 2)))` のような Lean の生の項を `(2 = 2)` のような読みやすい文字列に変換してくれます。以下に示す一連のコードはこれらを示しています：
+マッチする式を見つけることができたため、このマッチによって定理を閉じる必要があります。これには `Lean.Elab.Tactic.closeMainGoal` を用います。マッチする式が無い場合、`Lean.Meta.throwTacticEx` で例外を投げ、これによって与えられたゴールに対応するエラーを報告することができます。この例外を投げるとき、`m!"..."` を使って例外をフォーマットし、`MessageData` を構築します。これは `f!"..."` による `Format` よりもきれいなエラーメッセージを提供します。これは `MessageData` が **デラボレーション** も実行し、`(Eq.{1} Nat (OfNat.ofNat.{0} Nat 2 (instOfNatNat 2)) (OfNat.ofNat.{0} Nat 2 (instOfNatNat 2)))` のような Lean の生の項を `(2 = 2)` のような読みやすい文字列に変換してくれます。以下に示す一連のコードはこれらを示しています：
 -/
 
 elab "custom_assump_2" : tactic =>
