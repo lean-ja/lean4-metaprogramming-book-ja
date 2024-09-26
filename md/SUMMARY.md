@@ -13,7 +13,7 @@
 - [エラボレーション](./main/07_elaboration.md)
 - [エラボレーションによる DSL の埋め込み](./main/08_dsls.md)
 - [タクティク](./main/09_tactics.md)
-- [Lean4 Cheat-sheet](./main/10_cheat-sheet.md)
+- [Lean4 チートシート](./main/10_cheat-sheet.md)
 
 <!-- # Extra -->
 
