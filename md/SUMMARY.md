@@ -19,7 +19,7 @@
 
 # 付録
 
-- [Options](./extra/01_options.md)
+- [オプション](./extra/01_options.md)
 <!-- - [Attributes]() -->
 - [Pretty Printing](./extra/03_pretty-printing.md)
 
