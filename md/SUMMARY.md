@@ -21,7 +21,7 @@
 
 - [オプション](./extra/01_options.md)
 <!-- - [Attributes]() -->
-- [Pretty Printing](./extra/03_pretty-printing.md)
+- [整形表示](./extra/03_pretty-printing.md)
 
 <!-- # Solutions -->
 
