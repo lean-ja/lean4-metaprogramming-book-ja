@@ -657,13 +657,13 @@ for a good user experience.
 --#--
 ## Mini project
 --#--
-## 小さいプロジェクト
+## ミニプロジェクト
 --#--
 As a final mini project for this section we will re-build the arithmetic
 DSL from the syntax chapter in a slightly more advanced way, using a macro
 this time so we can actually fully integrate it into the Lean syntax.
 --#--
-この節の最後の小さいプロジェクトとして、構文の章で出てきた算術 DSL を、今回はマクロを使ってもう少し高度な方法で再構築し、実際に Lean の構文に完全に統合できるようにします。
+この節の最後のミニプロジェクトとして、構文の章で出てきた算術 DSL を、今回はマクロを使ってもう少し高度な方法で再構築し、実際に Lean の構文に完全に統合できるようにします。
 -/
 declare_syntax_cat arith
 

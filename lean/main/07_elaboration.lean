@@ -233,7 +233,7 @@ This is actually extending the original `#check`
 --#--
 ### Mini project
 --#--
-### 小さいプロジェクト
+### ミニプロジェクト
 --#--
 As a final mini project for this section let's build a command elaborator
 that is actually useful. It will take a command and use the same mechanisms
