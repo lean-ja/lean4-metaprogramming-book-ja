@@ -26,6 +26,7 @@
 | notation | 記法 |
 | parse | パース |
 | precedence | 優先順位 |
+| pretty print | プリティプリント |
 | priority | 優先度 |
 | proof term | 証明項 |
 | reduction | 簡約 |
@@ -46,5 +47,7 @@
 | 用語 |
 | --- |
 | loose |
+| parenthesizer |
 | syntax quotation |
 | synthetic metavariable |
+| unexpander |

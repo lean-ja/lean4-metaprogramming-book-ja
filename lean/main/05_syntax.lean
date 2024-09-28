@@ -672,7 +672,7 @@ it to match on your own syntax categories you will have to use `` `(category| ..
 --#--
 ### Mini Project
 --#--
-### 小さいプロジェクト
+### ミニプロジェクト
 --#--
 As a final mini project for this chapter we will declare the syntax of a mini
 arithmetic expression language and a function of type `Syntax → Nat` to evaluate
