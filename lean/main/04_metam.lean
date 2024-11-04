@@ -290,7 +290,7 @@ Its arguments are:
 
 --#--
 - `type?`：新しいメタ変数のターゲットの型。`none` の場合、ターゲットの型は `Sort ?u` となります。ここで `?u` は宇宙レベルのメタ変数です。（これは宇宙レベルのメタ変数の特別なクラスであり、これまで単に「メタ変数」と呼んできた式についてのメタ変数とは区別されます。）
-- `kind`：メタ変数の種（kind）。詳しくは [メタ変数の種](#定義上の同値) [^fn1] を参照してください（通常はデフォルト値が正しいです）。[^fn1]
+- `kind`：メタ変数の種（kind）。詳しくは [メタ変数の種](#定義上の等しさ) [^fn1] を参照してください（通常はデフォルト値が正しいです）。[^fn1]
 - `userName`：新しいメタ変数のユーザが目にする名前。これはメタ変数がゴールに現れる際に表示されるものになります。`MVarId` と異なり、この名前は一意である必要はありません。
 
 --#--
@@ -680,7 +680,7 @@ The `myAssumption` tactic contains three functions we have not seen before:
 
 --#--
 - `Lean.MVarId.checkNotAssigned` はメタ変数がすでに割当済みかどうかチェックします。上記で渡している「myAssumption」引数は現在のタクティクの名前です。これはより良いエラーメッセージを生成するために使用されます。
-- `Lean.Meta.isDefEq` は2つの定義が定義上等しいかどうかをチェックします。詳細は [定義上の同値の節](#定義上の同値) を参照してください。
+- `Lean.Meta.isDefEq` は2つの定義が定義上等しいかどうかをチェックします。詳細は [定義上の等しさの節](#定義上の等しさ) を参照してください。
 - `Lean.LocalDecl.toExpr` はローカルの仮定に対応する `fvar` 式を構築する補助関数です。
 
 --#--
@@ -1249,7 +1249,7 @@ ourselves.
 ### Definitional Equality
 
 --#--
-### 定義上の同値
+### 定義上の等しさ
 
 --#--
 As mentioned, definitional equality is equality up to computation. Two
@@ -1257,7 +1257,7 @@ expressions `t` and `s` are definitionally equal or *defeq* (at the current
 transparency) if their normal forms (at the current transparency) are equal.
 
 --#--
-前述したように、定義上の同値は計算においての同値です。2つの式 `t` と `s` は（現在の透過度において）正規形が等しい場合、定義上等しい、もしくは **defeq** となります。
+前述したように、定義上の等しさは計算においての同値です。2つの式 `t` と `s` は（現在の透過度において）正規形が等しい場合、定義上等しい、もしくは **defeq** となります。
 
 --#--
 To check whether two expressions are defeq, use `Lean.Meta.isDefEq` with type
@@ -1280,7 +1280,7 @@ reduce `s` and `t` so often that they end up in normal form anyway. But usually
 the heuristics are good and `isDefEq` is reasonably fast.
 
 --#--
-定義上の同値は正規形で定義されていますが、実際には `isDefEq` は非常に高価になりうる引数の正規形の計算をすることはありません。その代わりに、`t` と `s` をできるだけ少ない簡約で「一致」させようとします。これは必然的に発見的な試みであり、この発見的な試みが失敗すると `isDefEq` は非常に高価になる可能性があります。最悪の場合、`s` と `t` を頻繁に簡約しなければならず、結局正規形になってしまうこともあります。しかし、通常はこの発見的な手法はうまく働き、`isDefEq` はそれなりに高速です。
+定義上の等しさは正規形で定義されていますが、実際には `isDefEq` は非常に高価になりうる引数の正規形の計算をすることはありません。その代わりに、`t` と `s` をできるだけ少ない簡約で「一致」させようとします。これは必然的に発見的な試みであり、この発見的な試みが失敗すると `isDefEq` は非常に高価になる可能性があります。最悪の場合、`s` と `t` を頻繁に簡約しなければならず、結局正規形になってしまうこともあります。しかし、通常はこの発見的な手法はうまく働き、`isDefEq` はそれなりに高速です。
 
 --#--
 If expressions `t` and `u` contain assignable metavariables, `isDefEq` may
